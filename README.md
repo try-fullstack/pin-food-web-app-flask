@@ -1,5 +1,7 @@
 ## Pin Food
 
+[![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3DTryFullStack%26type%3Dpatrons%26suffix%3DTry%2520Full%2520Stack&style=for-the-badge)](https://patreon.com/TryFullStack)
+
 Is a web application (Built with Flask and MariaDB) that displays a page containing an
 interactive map. The user can mark the location of a new "food stall" on the map.
 Users can enter the date, category, and description of the "food stall".
