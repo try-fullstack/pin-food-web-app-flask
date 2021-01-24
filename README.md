@@ -23,6 +23,20 @@ Open `templates/home.py` and replace `YOUR_APIKEY` with your API Key:
 </script>
 ```
 
+Run MySQL/MariaDB Server, then run `dbsetup.py` to create the database and table:
+
+```
+python dbsetup.py
+```
+
+Run this project:
+
+```
+python pinfood.py
+```
+
+Open the url `http://localhost:5000` in a browser.
+
 ## System Requirements
 
 - Google API Key to access the Google Map.
