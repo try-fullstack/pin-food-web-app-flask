@@ -4,7 +4,7 @@ Is a web application (Built with Flask and MariaDB) that displays a page contain
 interactive map. The user can mark the location of a new "food stall" on the map.
 Users can enter the date, category, and description of the "food stall".
 
-[]('./header.jpg')
+![]('header.jpg')
 
 ## Quick Start
 
