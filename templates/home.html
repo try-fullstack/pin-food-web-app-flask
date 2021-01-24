@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pin Food</title>
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgLhZt2myGy3_QPT7UGauPucQiXbuXx50&callback=init">
+    </script>
+    <script type="text/javascript">
+      var map;
+      var marker;
+      
+      function init() {
+        var opt = {
+          center: new google.maps.LatLng(
+            -6.190059388922542,
+            106.7599655019272
+          ),
+          zoom: 12
+        };
+        map = new google.maps.Map(
+          document.getElementById("maps"),
+          opt
+        );
+        
+        google.maps.event.addListener(map, 'click',
+          function(event) {
+            setMarker(event.latLng);
+          }
+        );
+        
+        placeFood({{foods | safe}});
+      }
+      
+      function setMarker(location) {
+        if (marker) {
+          marker.setPosition(location);
+        } else {
+         marker = new google.maps.Marker({
+           position: location,
+           map: map
+         });
+        }
+        
+        document.getElementById('latitude')
+          .value = location.lat();
+        document.getElementById('longitude')
+          .value = location.lng();
+      }
+      
+      function placeFood(foods) {
+        for (i=0; i<foods.length; i++) {
+          new google.maps.Marker( {
+           position: new google.maps.LatLng(
+              foods[i].latitude,
+              foods[i].longitude),
+           map: map,
+           title: foods[i].date + "\n" +
+            foods[i].category + "\n" + foods[i].description
+           }
+          );
+        }
+      }
+    </script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/bootstrap.min.css') }}"
+    />
+  </head>
+  <body onload="init()">
+    <div class="container mt-4 mb-3">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="display-4">Pin Food</h1>
+          <hr>
+        </div>
+      </div>
+    </div>
+    <div class="container mb-3">
+      <div class="row">
+        <div class="col-md-8">
+          <div id="maps" style="height: 100%; width: 100%;"></div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h4 class="card-title">Submit new Food Stall</h4>
+              <form action="/savefood" method="post">
+                <div class="form-group">
+                  <label for="category">Category</label>
+                  <select class="form-control"
+                          name="category" id="category">
+                    <option value="eggs">Eggs</option>
+                    <option value="fish">Fish</option>
+                    <option value="hotmeat">Hot Meat</option>
+                    <option value="bread">Bread</option>
+                    <option value="preserves">Preserves</option>
+                    <option value="beverage">Beverage</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="date">Date</label>
+                  <input class="form-control"
+                         name="date" id="date" type="date">
+                </div>
+                <div class="form-group">
+                  <label for="latitude">Latitude</label>
+                  <input class="form-control"
+                         name="latitude" id="latitude" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="longitude">Longitude</label>
+                  <input class="form-control"
+                         name="longitude" id="longitude" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea class="form-control"
+                            name="description" id="description">
+                </textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
